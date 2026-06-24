@@ -1,66 +1,34 @@
-/* A simple css reset */
-body,
-html {
+/* Simple CSS Reset & Global Styling */
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+body, html {
     height: 100%;
-    /* The Font Family- Really important!! */
-    box-sizing: border-box;
-    .lateef-extralight {
-  font-family: "Lateef", serif;
-  font-weight: 200;
-  font-style: normal;
+    /* FIXED: Applied your imported Lateef font globally with fallback fonts */
+    font-family: "Lateef", serif, sans-serif; 
+    background-color: #f0f4f8; /* Soft background color makes your blue cards pop */
+    color: #333;
 }
 
-.lateef-light {
-  font-family: "Lateef", serif;
-  font-weight: 300;
-  font-style: normal;
-}
-
-.lateef-regular {
-  font-family: "Lateef", serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.lateef-medium {
-  font-family: "Lateef", serif;
-  font-weight: 500;
-  font-style: normal;
-}
-
-.lateef-semibold {
-  font-family: "Lateef", serif;
-  font-weight: 600;
-  font-style: normal;
-}
-
-.lateef-bold {
-  font-family: "Lateef", serif;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.lateef-extrabold {
-  font-family: "Lateef", serif;
-  font-weight: 800;
-  font-style: normal;
-}
-
-}
-
-/* reset for images to ensure they ar 100% of the parent container width */
+/* Ensure images fit cleanly inside cards and match the rounded corners */
 img {
     width: 100%;
+    border-radius: 0.3em;
+    display: block;
+    margin-bottom: 0.8em;
 }
 
-/* The hero section styling- use your OWN Hero Image URL here */
+/* The Hero Section */
+/* The hero section styling */
 .hero {
     background-image: url('images/WebsiteBanner.png');
     height: 25vh;
-    background-size: cover;
+    background-size: 100% 100%; /* FIXED: Forces the entire image and text to fit the screen */
     background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,53 +37,91 @@ img {
     position: relative;
 }
 
+/* Big text styling for hero section */
 /* BIG text styling for the hero section text */
 .hero-text {
     font-size: 4em;
     font-weight: bold;
-}
-
-/* nice big font on a banner style background */
-.topic-title{
-    color: rgb(255, 255, 255);
-    font-size: 2em;
-    padding: 0.1em 3em;
-    background-color: rgb(3, 96, 218);
-}
-
-/* Three column grid with a nice big gap */
-.topic-content{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6em;
-    /* bring the whole section in off the sides of the page */
-    width: 70%;
-    /* top margin of 3em and center right/left */
-    margin: 3em auto;
-}
-
-/* Styling for the individual topic cards rounded edges background color and a drop shadow */
-.topic-card{
-    background-color: rgb(3, 96, 218);
-    color: rgb(255, 255, 255);
-    padding: 1em;
-    border-radius: 0.5em;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Styling for the topic card titles */
-.topic-card-text{
-    font-size: 1.5em;
-    margin-bottom: 0.5em;
-    /* center align text */
+    width: 100%;
     text-align: center;
 }
 
+/* Banner style backgrounds for topic headers */
+.topic-title {
+    color: rgb(255, 255, 255);
+    font-size: 1.8em;
+    padding: 0.5em 2em;
+    background: linear-gradient(90deg, rgb(3, 96, 218), rgb(1, 59, 139)); /* Modern gradient */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 1em;
+}
 
-/* Styling for a footer section to take a bit of spcae at the bottom of the page */
-.footer{
+/* FLAIR UPGRADE: Responsive Grid Layout */
+.topic-content {
+    display: grid;
+    /* Automatically drops columns to a new row on small screens */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 3em; /* Tightened gap for a cleaner layout */
+    width: 85%;
+    margin: 2em auto 4em auto;
+}
+
+/* Specialized container layout for your game iframe */
+.topic-content-full {
+    width: 85%; /* Matches the 85% width of your other sections exactly */
+    max-width: 1050px; /* FIXED: Sized down slightly so it fits perfectly without being too massive */
+    margin: 2em auto 4em auto; /* Perfectly centers it with the matching margins */
+}
+
+/* FLAIR UPGRADE: Interactive Topic Cards */
+.topic-card {
     background-color: rgb(3, 96, 218);
+    color: rgb(255, 255, 255);
+    padding: 1.2em;
+    border-radius: 0.8em;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    /* This transition powers the animation smooth effect */
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease; 
+}
+
+/* Card Hover effect: Card floats up and shadow deepens when mouse sweeps over it */
+.topic-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 30px rgba(3, 96, 218, 0.3);
+    background-color: rgb(2, 82, 188); /* Subtle shift in color on hover */
+    cursor: pointer;
+}
+
+/* Large card configuration for the video game layout */
+.topic-card-large {
+    background-color: rgb(3, 96, 218);
+    color: rgb(255, 255, 255);
+    padding: 1.5em;
+    border-radius: 0.8em;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.topic-card-large iframe {
+    border-radius: 0.5em;
+    max-width: 100%; /* Prevents the inner frame from breaking out */
+}
+
+/* Card titles */
+.topic-card-text {
+    font-size: 1.6em;
+    margin-top: 0.5em;
+    text-align: center;
+}
+
+/* Styling for footer */
+.footer {
+    background-color: rgb(1, 59, 139);
     color: white;
-    text-align: left;
-    padding: 3em 3em;
+    text-align: center;
+    padding: 2em;
+    margin-top: 5em;
+    font-size: 1.2em;
 }
