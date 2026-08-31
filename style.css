@@ -7,26 +7,35 @@
 
 body, html {
     height: 100%;
-    /* FIXED: Applied your imported Lateef font globally with fallback fonts */
     font-family: "Lateef", serif, sans-serif; 
     background-color: #f0f4f8; /* Soft background color makes your blue cards pop */
     color: #333;
 }
 
-/* Ensure images fit cleanly inside cards and match the rounded corners */
-img {
+/* UPDATED: Ensures both images and videos inside cards act identically, forming uniform squares */
+.topic-card img,
+.topic-card video,
+.topic-card a img {
     width: 100%;
+    aspect-ratio: 1 / 1; /* Forces perfectly square boxes */
+    object-fit: cover;    /* Crops content gracefully instead of squishing it */
     border-radius: 0.3em;
     display: block;
     margin-bottom: 0.8em;
 }
 
+/* Fallback for global images if needed outside topic cards */
+img {
+    width: 100%;
+    border-radius: 0.3em;
+    display: block;
+}
+
 /* The Hero Section */
-/* The hero section styling */
 .hero {
     background-image: url('images/WebsiteBanner.png');
     height: 25vh;
-    background-size: 100% 100%; /* FIXED: Forces the entire image and text to fit the screen */
+    background-size: 100% 100%; 
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
@@ -38,7 +47,6 @@ img {
 }
 
 /* Big text styling for hero section */
-/* BIG text styling for the hero section text */
 .hero-text {
     font-size: 4em;
     font-weight: bold;
@@ -51,44 +59,54 @@ img {
     color: rgb(255, 255, 255);
     font-size: 1.8em;
     padding: 0.5em 2em;
-    background: linear-gradient(90deg, rgb(3, 96, 218), rgb(1, 59, 139)); /* Modern gradient */
+    background: linear-gradient(90deg, rgb(3, 96, 218), rgb(1, 59, 139)); 
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     margin-bottom: 1em;
 }
 
-/* FLAIR UPGRADE: Responsive Grid Layout */
+/* Layout Grid */
 .topic-content {
     display: grid;
-    /* Automatically drops columns to a new row on small screens */
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-    gap: 3em; /* Tightened gap for a cleaner layout */
+    gap: 3em; 
     width: 85%;
     margin: 2em auto 4em auto;
 }
 
 /* Specialized container layout for your game iframe */
 .topic-content-full {
-    width: 85%; /* Matches the 85% width of your other sections exactly */
-    max-width: 1050px; /* FIXED: Sized down slightly so it fits perfectly without being too massive */
-    margin: 2em auto 4em auto; /* Perfectly centers it with the matching margins */
+    width: 85%; 
+    max-width: 1050px; 
+    margin: 2em auto 4em auto; 
 }
 
-/* FLAIR UPGRADE: Interactive Topic Cards */
+/* UPDATED: Interactive Topic Cards configured as Flexbox layout */
 .topic-card {
     background-color: rgb(3, 96, 218);
     color: rgb(255, 255, 255);
     padding: 1.2em;
     border-radius: 0.8em;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    /* This transition powers the animation smooth effect */
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease; 
+    
+    display: flex;         /* Turns card into a flex column framework */
+    flex-direction: column;
 }
 
-/* Card Hover effect: Card floats up and shadow deepens when mouse sweeps over it */
+/* Nested anchor handling for clickable cards */
+.topic-card a {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Card Hover effect */
 .topic-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 30px rgba(3, 96, 218, 0.3);
-    background-color: rgb(2, 82, 188); /* Subtle shift in color on hover */
+    background-color: rgb(2, 82, 188); 
     cursor: pointer;
 }
 
@@ -106,13 +124,14 @@ img {
 
 .topic-card-large iframe {
     border-radius: 0.5em;
-    max-width: 100%; /* Prevents the inner frame from breaking out */
+    max-width: 100%; 
 }
 
-/* Card titles */
+/* UPDATED: Card titles are forced to anchor perfectly at the baseline */
 .topic-card-text {
     font-size: 1.6em;
-    margin-top: 0.5em;
+    margin-top: auto; /* Acts like an anchor, forcing titles down to the card edge */
+    padding-top: 0.5em;
     text-align: center;
 }
 
