@@ -9,19 +9,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     
-    <!-- Favicon link added below -->
-    <link rel="icon" type="image/png" href="images/Favicon-20260827-113437.png">
+    <link rel="icon" type="image/png" href="images/Favicon.png">
 
     <title>Matthew's Digital Portfolio</title>
 </head>
 
 <body>
 
+    <nav class="navbar">
+        <ul>
+            <li><a href="#image-editing" class="nav-link">Image Editing</a></li>
+            <li><a href="#computer-science" class="nav-link">Computer Science</a></li>
+            <li><a href="#python" class="nav-link">Python</a></li>
+            <li><a href="#videogame-dev" class="nav-link">Videogame Dev</a></li>
+            <li><a href="#blender" class="nav-link">Blender</a></li>
+            <li><a href="#animation" class="nav-link">Animation</a></li>
+        </ul>
+    </nav>
+
     <section class="hero">
         <div class="hero-text"></div>
     </section>
 
-    <section class="topic">
+    <section id="image-editing" class="topic">
         <div class="topic-title">
             <h1>Image Editing</h1>
         </div>
@@ -41,7 +51,7 @@
         </div>
     </section>
 
-    <section class="topic">
+    <section id="computer-science" class="topic">
         <div class="topic-title">
             <h1>Computer Science</h1>
         </div>
@@ -63,7 +73,7 @@
         </div>
     </section>
 
-    <section class="topic">
+    <section id="python" class="topic">
         <div class="topic-title">
             <h1>Python</h1>
         </div>
@@ -83,7 +93,7 @@
         </div>
     </section>
 
-    <section class="topic">
+    <section id="videogame-dev" class="topic">
         <div class="topic-title">
             <h1>Videogame Development</h1>
         </div>
@@ -120,7 +130,7 @@
         </div>
     </section>
 
-    <section class="topic">
+    <section id="blender" class="topic">
         <div class="topic-title">
             <h1>Blender</h1>
         </div>
@@ -142,7 +152,7 @@
         </div>
     </section>
 
-    <section class="topic">
+    <section id="animation" class="topic">
         <div class="topic-title">
             <h1>Animation</h1>
         </div>
@@ -161,7 +171,7 @@
             </div>
             <div class="topic-card">
                 <img src="images/truckblender.PNG" alt="Truck">
-                <h2 class="topic-card-text">My Blender Truck</h2>
+                <h2 class="topic-card-text">My Blender Truck Animation</h2>
             </div>
         </div>
     </section>
@@ -169,6 +179,34 @@
     <footer class="footer">
         <p>&copy; 2026 My Showcase Website By Matthew Heath Williams</p>
     </footer>
+
+    <script>
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-30% 0px -60% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const activeId = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('href') === `#${activeId}`) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+    </script>
 
 </body>
 </html>
