@@ -58,12 +58,12 @@ section.topic {
     box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.6);
 }
 
-/* Stay lit up when clicked or scrolled to (Active state) */
+/* Active state (stays lit up while viewing section) */
 .navbar li a.active {
     background-color: rgb(3, 96, 218);
     color: #ffffff;
     font-weight: bold;
-    box-shadow: inset 0 -4px 0 #ffffff; /* Underline glow indicator */
+    box-shadow: inset 0 -4px 0 #ffffff;
 }
 
 /* Hero Section */

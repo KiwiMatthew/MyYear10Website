@@ -16,6 +16,7 @@
 
 <body>
 
+    <!-- Nav bar placed at the top of body -->
     <nav class="navbar">
         <ul>
             <li><a href="#image-editing" class="nav-link">Image Editing</a></li>
@@ -99,9 +100,13 @@
         </div>
         <div class="topic-content-full">
             <div class="topic-card-large">
-                <iframe frameborder="0" src="https://itch.io/embed-upload/18025643?color=333333" allowfullscreen="" width="100%" height="560" style="border: none; display: block; margin: 0 auto;">
-                    <a href="https://matthew25130.itch.io/starting-platformer">Play Starting Platformer on itch.io</a>
-                </iframe>
+                <!-- Container that holds either the play placeholder or the iframe game -->
+                <div id="game-container" style="width: 100%; height: 560px; background-color: #1a1a1a; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 0.5em; color: white;">
+                    <h3 style="margin-bottom: 15px; font-size: 1.8em;">Red Hero Platformer</h3>
+                    <button onclick="loadGame()" style="padding: 12px 28px; font-size: 1.2em; font-weight: bold; color: white; background-color: rgb(3, 96, 218); border: none; border-radius: 6px; cursor: pointer; transition: background-color 0.2s;">
+                        ▶ Play Game
+                    </button>
+                </div>
                 <h2 class="topic-card-text" style="margin-top: 15px;">Red Hero Platformer</h2>
             </div>
         </div>
@@ -170,7 +175,9 @@
                 <h2 class="topic-card-text">Backflip Animation</h2>
             </div>
             <div class="topic-card">
-                <img src="images/truckblender.PNG" alt="Truck">
+                <video controls autoplay muted loop>
+                    <source src="images/Uteanimation.mp4" type="video/mp4">
+                </video>
                 <h2 class="topic-card-text">My Blender Truck Animation</h2>
             </div>
         </div>
@@ -181,6 +188,25 @@
     </footer>
 
     <script>
+        // Dynamically injects the iframe ONLY when the button is clicked
+        function loadGame() {
+            const container = document.getElementById('game-container');
+            container.innerHTML = `
+                <iframe frameborder="0" src="https://itch.io/embed-upload/18025643?color=333333" allowfullscreen="" width="100%" height="560" style="border: none; display: block; margin: 0 auto;">
+                    <a href="https://matthew25130.itch.io/starting-platformer">Play Starting Platformer on itch.io</a>
+                </iframe>
+            `;
+        }
+
+        // Force browser to stay at top on page load/refresh
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+        window.addEventListener('load', () => {
+            window.scrollTo(0, 0);
+        });
+
+        // Intersection Observer to highlight navbar active links on scroll
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-link');
 
